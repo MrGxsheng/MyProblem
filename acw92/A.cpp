@@ -5,30 +5,25 @@
 #define fi first
 #define se second
 #define endl '\n'
-using i64 = long long;
-  
-void solve() {
-    int n, d, k;
-    std::cin >> n >> d >> k;
-    
-    k--;
-    
-    int g = n / std::gcd(n, d);
-    std::cout << (1LL * d * (k % g) + k / g) % n << "\n";
+using namespace std;
+typedef long long LL;
+typedef pair<int,int> PII;
+const int N = 1000010;
+int n,m;
+void solve(){
+	cin >> n;
+	if(n % 4 == 0) cout << "YES" << endl;
+	else cout << "NO" << endl;
 }
- 
-int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    
-    int t;
-    std::cin >> t;
-    
-    while (t--) {
-        solve();
-    }
-    
-    return 0;
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0),cout.tie(0);
+	int T;
+	cin >> T;
+	// T = 1;
+	while(T--) solve();
+	return 0;
 }
 
 /*

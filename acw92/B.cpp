@@ -5,31 +5,36 @@
 #define fi first
 #define se second
 #define endl '\n'
-using i64 = long long;
-  
-void solve() {
-    int n, d, k;
-    std::cin >> n >> d >> k;
-    
-    k--;
-    
-    int g = n / std::gcd(n, d);
-    std::cout << (1LL * d * (k % g) + k / g) % n << "\n";
+using namespace std;
+typedef long long LL;
+typedef pair<int,int> PII;
+const int N = 1000010;
+string str="",s;
+int flag=1;
+
+void input(){
+    if(cin>>s){
+        str+=s;
+        if(s=="pair"){
+            str+='<';
+            input();
+            str+=',';
+            input();
+            str+='>';
+        }
+    }else flag=0;
 }
- 
-int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    
-    int t;
-    std::cin >> t;
-    
-    while (t--) {
-        solve();
-    }
-    
-    return 0;
+
+
+int main(){
+    int n;cin>>n;
+    input();
+    if(cin>>s)flag=0;
+    if(!flag)cout<<"Error occurred\n";
+    else cout<<str<<endl;
+
 }
+
 
 /*
 *
