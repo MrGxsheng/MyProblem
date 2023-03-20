@@ -11,20 +11,25 @@ typedef pair<int,int> PII;
 const int N = 1000010;
 int n,m;
 void solve(){
-	LL x1,x2,y2,y1;
+	cin >> n;
+	vector<int> a(n);
+	int sum = 0;
+	int sum1 = 0;
+	for(int i = 0 ; i < n ; i++) {
+		cin >> a[i];
+		if(a[i] & 1) sum1 += a[i];
+		else sum += a[i];
+	}
 
-	cin >> x1 >> y1;
-	cin >> x2 >> y2;
-
-	cout << max(abs(x1 - x2),abs(y1 - y2)) << endl;
+	if(sum <= sum1) cout << "No" << endl;
+	else cout << "Yes" << endl;
 }
-	
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0),cout.tie(0);
 	int T;
-	// cin >> T;
-	T = 1;
+	cin >> T;
 	while(T--) solve();
 	return 0;
 }

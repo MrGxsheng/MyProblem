@@ -10,23 +10,37 @@ typedef long long LL;
 typedef pair<int,int> PII;
 const int N = 1000010;
 int n,m;
-void solve(){
-	LL x1,x2,y2,y1;
-
-	cin >> x1 >> y1;
-	cin >> x2 >> y2;
-
-	cout << max(abs(x1 - x2),abs(y1 - y2)) << endl;
+int t;
+int solve(int n,int m,int sx,int sy,int tx,int ty,string s)
+{
+	int dx,dy;
+	if(s[0]=='D')dx=1;
+	else dx=-1;
+	if(s[1]=='R')dy=1;
+	else dy=-1;
+	int res=0;
+	while(1){
+		if(sx==tx&&sy==ty)return res;
+		int f=0;
+		if(sx+dx>n||sx+dx<1)dx=-dx,f++,res++;
+		if(sy+dy>m||sy+dy<1)dy=-dy,f++,res++;
+		res-=(f==2);
+		sx+=dx,sy+=dy;
+		if(res>n*m+5)return -1;
+	}
 }
-	
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0),cout.tie(0);
-	int T;
-	// cin >> T;
-	T = 1;
-	while(T--) solve();
-	return 0;
+int main()
+{
+    cin.tie(0);cout.tie(0);
+    cin>>t;
+    while(t--){
+    	int n,m,sx,sy,tx,ty;
+    	string s;
+    	cin>>n>>m>>sx>>sy>>tx>>ty>>s;
+    	int res=solve(n,m,sx,sy,tx,ty,s);
+    	cout<<res<<endl;
+	}
+    return 0;
 }
 
 /*
