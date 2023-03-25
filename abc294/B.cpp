@@ -18,9 +18,10 @@ void solve(){
 		for(int j = 0 ; j < m ; j++)
 			if(a[i][j] == 0) ans[i][j] = '.';
 			else ans[i][j] = a[i][j] - 1 + 'A';
+
 	for(int i = 0 ; i < n ; i++){
 		for(int j = 0 ; j < m ; j++)
-			cout << ans[i][j] << ' ';
+			cout << ans[i][j];
 		cout << endl;
 	}
 }
