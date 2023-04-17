@@ -6,8 +6,13 @@ typedef pair<int,int> PII;
 const int N = 1000010;
 int n,m;
 void solve(){
-	cin >> n >> m;
-	cout << m + (m - 1) / (n - 1) << endl;
+  int x,y;
+	cin>>x>>y;
+	int c1=0,c2=0;
+	while(x>2)x=(x-1)/2,c1++;
+	while(y>2)y=(y-1)/2,c2++;
+	cout<<(c1==c2?"Bob\n":"Alice\n");
+
 }
 
 int main(){
