@@ -1,0 +1,10 @@
+template <class T = int> T read() {
+  T x = 0; bool f = 0; char ch = gc();
+  while (!isdigit(ch)) f = ch == '-', ch = gc();
+  while (isdigit(ch)) x = (x << 3) + (x << 1) + (ch ^ 48), ch = gc();
+  return f ? -x: x;
+}
+template <class T> void write(T x) {
+  if (x >= 0) { if (x > 9) write(x / 10); pc(x % 10 + 48); }
+  else { pc('-'); if (x < -9) write(-x / 10); pc(48 - x % 10); }
+}

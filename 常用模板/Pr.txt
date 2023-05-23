@@ -1,0 +1,37 @@
+struct Primes {
+    bitset <N> st;
+    int cnt,primes[N],idx[N],n;
+ 
+    Primes(int n = N - 1) {
+        this->n = n;
+        init(n);
+    }
+ 
+    void init(int n) {
+        st[0] = st[1] = 1;
+        for(int i = 2;i <= n;i ++) {
+            if(!st[i]) {
+                primes[++ cnt] = i;
+                idx[i] = cnt;
+            }
+            for(int j = 1;primes[j] <= n / i;j ++) {
+                st.flip(primes[j] * i);
+                if(i % primes[j] == 0) break;
+            }
+        }
+    }
+    
+    //判断x是否是质数      
+    bool isPrime(int x) {
+        assert(x <= n);
+        return !st[x];
+    }
+    
+    //求解x在质数表是第几个                    
+    bool atIndex(int x) {
+        assert(!st[x]);
+        assert(x <= n);
+        return idx[x];
+    }
+};
+using i128 = __int128;
