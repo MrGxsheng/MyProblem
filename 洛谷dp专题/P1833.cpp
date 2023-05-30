@@ -20,7 +20,7 @@ void solve(){
 	 cin >> n;
 
 	 vector<tuple<int,int,int>> a(n + 1);
-	 for(int i = 1 ; i <= n ; i++){
+	 for(int i = 1 ; i <= n ; i++){ 
 	 	int x,y,z;
 	 	cin >> x >> y >> z;
 	 	a[i] = {x,y,z};
