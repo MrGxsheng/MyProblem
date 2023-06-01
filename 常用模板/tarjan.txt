@@ -1,0 +1,25 @@
+bool in_stk[N];
+int dfn[M],low[N],timestamp,stk[N],top;
+int id[N],scc_cnt,Siz[N];
+void tarjan(int u){
+	dfn[u] = low[u] = ++ timestamp;
+	stk[++ top] = u,in_stk[u] = true;
+	for(auto [x,w] : G[u]){
+		if(x == u) continue;
+		if(!dfn[x]){
+			tarjan(x);
+			low[u] = min(low[u],low[x]);
+		}else if(in_stk[x]) low[u] = min(low[u],dfn[x]);
+	}
+
+	if(dfn[u] == low[u]){
+		++ scc_cnt;
+		int y;
+		do{
+			y = stk[top--];
+			in_stk[y] = false;
+			id[y] = scc_cnt;
+			Siz[scc_cnt] ++;
+		}while(y != u);
+	}
+}
