@@ -1,0 +1,64 @@
+l - r ai ^ x
+
+template <typename T>
+29 struct SegmentTree {
+30 int n;
+31 struct Node {
+32 int l,r;
+33 int v,lazy;
+34 };
+35 vector<T> b;
+36 vector<Node> seg;
+37 
+38 SegmentTree (int n) : n(n), b(n + 1) ,seg((n << 2) + 1){}
+39
+40 inline void push_up(int u) {
+41 seg[u].v = seg[u << 1].v + seg[u << 1 | 1].v;
+42 }
+43 
+44 inline void push_dw(int u) {
+45 if(seg[u].lazy) {
+46 seg[u << 1].lazy ^= 1;
+47 seg[u << 1 | 1].lazy ^= 1;
+48 seg[u << 1].v = seg[u << 1].r - seg[u << 1].l + 1 - seg[u << 1].v;
+49 seg[u << 1 | 1].v = seg[u << 1 | 1].r - seg[u << 1 | 1].l + 1 - seg[u << 1
+| 1].v;
+50 seg[u].lazy = 0;
+51 }
+52 }
+53
+54 inline void build(int u,int l,int r) {
+55 seg[u] = {l,r,0,0};
+56 if(l == r) {
+57 seg[u].v = b[l];
+58 return;
+59 } 
+60 int mid = (l + r) >> 1;
+61 build(u << 1,l,mid);
+62 build(u << 1 | 1,mid + 1,r);
+63 push_up(u);
+64 }
+65
+66 inline T query(int u,int l,int r) {
+67 if(seg[u].l >= l && seg[u].r <= r) return seg[u].v;
+68 int mid = (seg[u].l + seg[u].r) >> 1;
+69 push_dw(u);
+70 T res = 0;
+71 if(l <= mid) res += query(u << 1,l,r);
+72 if(r > mid) res += query(u << 1 | 1,l,r);
+73 return res;
+74 }
+75
+76 inline void modify(int u,int l,int r) {
+77 if(seg[u].l >= l && seg[u].r <= r) {
+78 seg[u].v = (seg[u].r - seg[u].l + 1) - seg[u].v;
+79 seg[u].lazy ^= 1;
+80 return;
+81 }
+82 push_dw(u);
+83 int mid = (seg[u].l + seg[u].r) >> 1;
+84 if(l <= mid) modify(u << 1,l,r);
+85 if(r > mid) modify(u << 1 | 1,l,r);
+86 push_up(u);
+87 }
+88 }

@@ -6,6 +6,8 @@ typedef pair<int,int> PII;
 const int N = 1000010;
 vector<int> pro[N];
 int n, m, q;
+
+
 struct Node{
     int a, b, c;
     bool operator< (const Node &W)const {

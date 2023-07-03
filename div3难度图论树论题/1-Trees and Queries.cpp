@@ -11,7 +11,7 @@ int dep[N],fa[N][17];
 void dfs(int now,int f){
 	fa[now][0] = f;
 	dep[now] = dep[f] + 1;
-	for(int i = 1 ; i <= 16 ; i++) fa[now][i] = fa[fa[now][i -1]][i - 1];
+	for(int i = 1 ; i <= 16 ; i++) fa[now][i] = fa[fa[now][i - 1]][i - 1];
 
 	for(auto x : G[now]){
 		if(x == f) continue;
