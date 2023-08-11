@@ -6,21 +6,22 @@ typedef pair<int,int> PII;
 const int N = 1000010;
 int n,m;
 void solve(){
-	cin >> n;
-	vector<int> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i];
 	string s;
-	cin >> s;
-	map<PII,int> mp;
-	for(int i = 0 ; i < n ; i++){
-		mp[{s[i],a[i]}]++;
-	}
+	cin >> n >> s;
 
+	array<int,2> f{};
 	LL ans = 0;
-	for(int i = 0 ; i < n ; i++) ans += 1ll * mp[{s[i] == 'B' ? 'R' : 'B',a[i]}];
-	ans /= 2;
+	for(auto c : s){
+		if(c == '0'){
+			f[1] += f[0];
+			f[0] = 1;
+		}else{
+			swap(f[0],f[1]);
+			f[1]++;
+		}
+		ans += f[1];
+	}
 	cout << ans << endl;
-
 }
 
 int main(){

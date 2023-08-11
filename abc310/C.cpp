@@ -7,19 +7,31 @@ const int N = 1000010;
 int n,m;
 void solve(){
 	cin >> n;
-	vector<int> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i];
-	string s;
-	cin >> s;
-	map<PII,int> mp;
+	map<string,int> mp;
+	vector<string> s(n);
 	for(int i = 0 ; i < n ; i++){
-		mp[{s[i],a[i]}]++;
+		cin >> s[i];
+		mp[s[i]]++;
 	}
 
-	LL ans = 0;
-	for(int i = 0 ; i < n ; i++) ans += 1ll * mp[{s[i] == 'B' ? 'R' : 'B',a[i]}];
-	ans /= 2;
+	int ans = n;
+
+	for(int i = 0 ; i < n ; i++){
+		if(!mp[s[i]]) continue;
+		string ss = s[i];
+		reverse(ss.begin(),ss.end());
+		ans -= mp[ss];
+		mp[ss] = 0;
+		if(ss == s[i]) ans++;
+		else{
+			ans = ans -  mp[s[i]] + 1;
+			mp[s[i]] = 0;
+			
+		}
+	}
+
 	cout << ans << endl;
+
 
 }
 

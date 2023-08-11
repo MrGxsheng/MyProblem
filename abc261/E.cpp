@@ -4,23 +4,32 @@ using namespace std;
 typedef long long LL;
 typedef pair<int,int> PII;
 const int N = 1000010;
-int n,m;
+int n,m,c;
 void solve(){
-	cin >> n;
-	vector<int> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i];
-	string s;
-	cin >> s;
-	map<PII,int> mp;
+	cin >> n >> c;
+	int A = (1 << 30) - 1 , O = 0 , X = 0;
 	for(int i = 0 ; i < n ; i++){
-		mp[{s[i],a[i]}]++;
+		int t,x;
+		cin >> t >> x;
+
+		if(t == 1){
+			A &= x;
+			O &= x;
+			X &= x;
+		}else if(t == 2){
+			A |= x;
+			O |= x;
+			X &= ~x;
+		}else {
+			int t = x & (~A | O);
+			A ^= t;
+			O ^= t;
+			X ^= x ^ t;
+		}
+
+		c = ((c & A) | O) ^ X;
+		cout << c << endl;
 	}
-
-	LL ans = 0;
-	for(int i = 0 ; i < n ; i++) ans += 1ll * mp[{s[i] == 'B' ? 'R' : 'B',a[i]}];
-	ans /= 2;
-	cout << ans << endl;
-
 }
 
 int main(){

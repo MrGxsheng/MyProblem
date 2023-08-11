@@ -1,0 +1,22 @@
+struct BinaryIndexedTree {
+  int node[maxK];
+
+  int lowbit(int x) { return x & -x; }
+
+  void Add(int pos, int val) {
+    while (pos <= k) {
+      node[pos] += val;
+      pos += lowbit(pos);
+    }
+    return;
+  }
+
+  int Ask(int pos) {
+    int res = 0;
+    while (pos) {
+      res += node[pos];
+      pos -= lowbit(pos);
+    }
+    return res;
+  }
+} BIT;

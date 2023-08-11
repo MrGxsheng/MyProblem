@@ -7,28 +7,32 @@ const int N = 1000010;
 int n,m;
 void solve(){
 	cin >> n;
-	vector<int> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i];
 	string s;
 	cin >> s;
-	map<PII,int> mp;
-	for(int i = 0 ; i < n ; i++){
-		mp[{s[i],a[i]}]++;
+	int x = count(s.begin(), s.end(),'(');
+	int y = n - x;
+	if(x != y) {
+		cout << -1 << endl;
+		return;
 	}
 
 	LL ans = 0;
-	for(int i = 0 ; i < n ; i++) ans += 1ll * mp[{s[i] == 'B' ? 'R' : 'B',a[i]}];
-	ans /= 2;
+	int sum = 0;
+	for(char c : s){
+		if(c == '(') sum++;
+		else{
+			sum--;
+			if(sum < 0) ans -= sum;
+		}
+	}
 	cout << ans << endl;
-
 }
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0),cout.tie(0);
 	int T;
-	// cin >> T;
-	T = 1;
+	cin >> T;
 	while(T--) solve();
 	return 0;
 }

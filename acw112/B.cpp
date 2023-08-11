@@ -9,17 +9,22 @@ void solve(){
 	cin >> n;
 	vector<int> a(n);
 	for(int i = 0 ; i < n ; i++) cin >> a[i];
-	string s;
-	cin >> s;
-	map<PII,int> mp;
-	for(int i = 0 ; i < n ; i++){
-		mp[{s[i],a[i]}]++;
-	}
 
-	LL ans = 0;
-	for(int i = 0 ; i < n ; i++) ans += 1ll * mp[{s[i] == 'B' ? 'R' : 'B',a[i]}];
-	ans /= 2;
-	cout << ans << endl;
+	for(int i = 0 ; i < n ; i++)
+		if(a[i] == i + 1) continue;
+		else{
+			auto b = a;
+			reverse(b.begin() + i,b.begin() + a[i]);
+			for(int j = 0 ; j < n ; j++){
+				if(b[j] != j + 1){
+					cout << 0 << ' ' << 0 << endl;
+					return;
+				}
+			}
+			cout << i + 1 << ' ' << a[i] << endl; 
+			return;
+		}
+	cout << 0 << ' ' << 0 << endl;
 
 }
 
